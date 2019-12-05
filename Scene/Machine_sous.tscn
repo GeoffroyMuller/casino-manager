@@ -6,6 +6,7 @@
 
 [node name="Machine_sous" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+rewardAtTime = 60
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
 texture = ExtResource( 3 )

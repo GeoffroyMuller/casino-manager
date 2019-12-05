@@ -9,9 +9,3 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
 texture = ExtResource( 3 )
-
-[node name="ProgressBar" parent="." index="3"]
-visible = false
-
-[node name="UpdateProgressBar" parent="." index="4"]
-autostart = false

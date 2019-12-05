@@ -1,11 +1,9 @@
 extends "res://Scene/Script/room_interface.gd"
 
-
 func _ready():
 	id = 2
-	cost = 100
-	gain = 300
-	$Timer.start()
+	initialize_gain_cost(400,100)
+	initialize_timer()
 
 func on_click():
 	emit_signal("clicked", self, id)
