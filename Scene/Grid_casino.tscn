@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scene/Script/Grid_casino.gd" type="Script" id=1]
-[ext_resource path="res://Scene/RoomsMenu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scene/room_menu.tscn" type="PackedScene" id=2]
 
 [node name="Grid_casino" type="Node2D"]
 position = Vector2( 292.3, 178.287 )

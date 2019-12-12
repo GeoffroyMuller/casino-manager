@@ -12,7 +12,7 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="ItemList" type="ItemList" parent="Panel"]
-margin_right = 196.0
+margin_right = 355.0
 margin_bottom = 166.0
 max_columns = 4
 
@@ -46,5 +46,13 @@ margin_top = 101.436
 margin_right = 188.244
 margin_bottom = 115.436
 text = "Machine à sous"
+
+[node name="exit" type="Button" parent="Panel/ItemList"]
+margin_left = 325.0
+margin_top = 4.0
+margin_right = 348.0
+margin_bottom = 24.0
+text = "X"
 [connection signal="pressed" from="Panel/ItemList/AccueilButton" to="." method="_on_AccueilButton_pressed"]
 [connection signal="pressed" from="Panel/ItemList/MASButton" to="." method="_on_MASButton_pressed"]
+[connection signal="pressed" from="Panel/ItemList/exit" to="." method="_on_exit_pressed"]

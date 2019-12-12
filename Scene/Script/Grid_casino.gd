@@ -1,7 +1,5 @@
 extends Node2D
 
-onready var accueil : PackedScene =  preload("res://Scene/Accueil.tscn")
-onready var machine_sous : PackedScene =  preload("res://Scene/Machine_sous.tscn")
 onready var nul : PackedScene = preload("res://Scene/Empty.tscn")
 
 signal gainChanged(gain)
@@ -18,8 +16,6 @@ var y : Array = [0, 64, 128, 192]
 
 func _ready():
 	initialize_empty_grid()
-	set_object_at_coordonates(1,1,accueil)
-	set_object_at_coordonates(1,2,machine_sous)
 	pass 
 	
 func get_object_at_coordonates(x_coord, y_coord) -> PackedScene :
@@ -67,14 +63,16 @@ func connect_signals(object_instance):
 	object_instance.connect("clicked", self,"onObjectClicked")
 	object_instance.connect("facture", self,"onFactureReceived")
 
-# when a room is clicked 
+func display_room_menu(room):
+	$allRoom/RoomsMenu.visible = true
+	$allRoom/RoomsMenu.position = get_global_mouse_position() - $".".position
+	$allRoom/RoomsMenu.set_pos(room.get_pos()[0], room.get_pos()[1])
+
+# when a room is clicked screen the menu to select the room
 func onObjectClicked(room, id):
 	print(room.get_pos(), " ", id)
-	#replace an empty room with the room stocked in objectToCreate
-	if (id == 0):	
-		$allRoom/RoomsMenu.visible = true
-		$allRoom/RoomsMenu.set_pos(room.get_pos()[0], room.get_pos()[1])
-	# else print info of the selected room
+	if (id == 0 and $allRoom/RoomsMenu.visible == false):	
+		display_room_menu(room)
 
 func onObjectSelected(room, pos):
 	set_object_at_coordonates(pos[0], pos[1], room)

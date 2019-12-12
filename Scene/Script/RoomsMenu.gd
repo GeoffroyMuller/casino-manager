@@ -26,3 +26,8 @@ func _on_AccueilButton_pressed():
 
 func _on_MASButton_pressed():
 	create_and_init(machine_sous)
+
+
+func _on_exit_pressed():
+	self.visible = false
+	pass # Replace with function body.
