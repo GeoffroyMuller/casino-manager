@@ -4,9 +4,6 @@ onready var accueil : PackedScene =  preload("res://Scene/Accueil.tscn")
 onready var machine_sous : PackedScene =  preload("res://Scene/Machine_sous.tscn")
 onready var nul : PackedScene = preload("res://Scene/Empty.tscn")
 
-# will contain the object the user want to create
-onready var objectToCreate : PackedScene = accueil
-
 signal gainChanged(gain)
 
 onready var grid : Array = [
@@ -18,8 +15,6 @@ onready var grid : Array = [
 
 var x : Array = [0, 128, 256]
 var y : Array = [0, 64, 128, 192]
-
-var rooms : Array = [null, accueil]
 
 func _ready():
 	initialize_empty_grid()
@@ -46,7 +41,7 @@ func set_object_at_coordonates(x_coord, y_coord, object):
 func display_room(i, j):
 	var obj = get_object_at_coordonates(i,j)
 	if (obj != null):
-		$allFloor.add_child(obj)
+		$allRoom.add_child(obj)
 		obj.position = Vector2(x[j], y[i])
 		
 func initialize_empty_grid():
@@ -72,16 +67,19 @@ func connect_signals(object_instance):
 	object_instance.connect("clicked", self,"onObjectClicked")
 	object_instance.connect("facture", self,"onFactureReceived")
 
-# when a floor is clicked 
+# when a room is clicked 
 func onObjectClicked(room, id):
 	print(room.get_pos(), " ", id)
-	
-	#replace an empty floor with the floor stocked in objectToCreate
-	if (id == 0 and objectToCreate != null):
-		set_object_at_coordonates(room.get_pos()[0], room.get_pos()[1], objectToCreate)
+	#replace an empty room with the room stocked in objectToCreate
+	if (id == 0):	
+		$allRoom/RoomsMenu.visible = true
+		$allRoom/RoomsMenu.set_pos(room.get_pos()[0], room.get_pos()[1])
+	# else print info of the selected room
 
-		objectToCreate = null
-	# else print info of the selected floor
+func onObjectSelected(room, pos):
+	set_object_at_coordonates(pos[0], pos[1], room)
+	$allRoom/RoomsMenu.visible = false
+	pass
 
 #receive all the signals from every rooms and emit a signal who whill be handled by the main scene
 func onFactureReceived(gain, cost):
@@ -89,4 +87,3 @@ func onFactureReceived(gain, cost):
 	var total = gain - cost 
 	# the core scene will handled this signal and modified the gain
 	emit_signal("gainChanged", total)
-	pass

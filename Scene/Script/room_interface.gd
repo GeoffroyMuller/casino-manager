@@ -11,6 +11,9 @@ export var rewardAtTime : int = 0
 signal clicked(room, id)
 signal facture(gain, cost)
 
+func get_id() -> int :
+	return id
+
 func get_pos() -> Array :
 	return [position_x, position_y]
 	
