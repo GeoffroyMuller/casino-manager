@@ -77,7 +77,6 @@ func onObjectClicked(room, id):
 func onObjectSelected(room, pos):
 	set_object_at_coordonates(pos[0], pos[1], room)
 	$allRoom/RoomsMenu.visible = false
-	pass
 
 #receive all the signals from every rooms and emit a signal who whill be handled by the main scene
 func onFactureReceived(gain, cost):
