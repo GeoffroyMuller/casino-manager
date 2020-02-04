@@ -63,10 +63,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -60.0
-margin_top = 150.0
+margin_left = -64.0
+margin_top = 200.0
 margin_right = 68.0
-margin_bottom = 214.0
+margin_bottom = 264.0
 texture_normal = ExtResource( 5 )
 script = ExtResource( 6 )
 

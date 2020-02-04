@@ -21,7 +21,11 @@ func _ready():
 	pass 
 	
 func get_object_at_coordonates(x_coord, y_coord) -> PackedScene :
-	var room_object = grid[x_coord][y_coord]
+	var room_object
+	if x_coord >= 0 and x_coord <= x.size() and y_coord >= 0 and y_coord <= y.size() : 
+		room_object = grid[x_coord][y_coord]
+	else :
+		room_object = null
 	return room_object
 
 func set_object_at_coordonates(x_coord, y_coord, object):
@@ -88,7 +92,6 @@ func onObjectSelected(room, pos):
 		set_object_at_coordonates(pos[0], pos[1], room)
 		$allRoom/Camera2D/RoomsMenu.visible = false
 
-#receive all the signals from every rooms and emit a signal who whill be handled by the main scene
 func onFactureReceived(gain, cost):
 	print("cost = ", cost, " gain = ", gain)
 	var total = gain - cost 
