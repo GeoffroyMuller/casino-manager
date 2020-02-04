@@ -13,6 +13,18 @@ export var rewardAtTime : int = 0
 signal clicked(room, id)
 signal facture(gain, cost)
 
+func save() -> JSON:
+	var save_dict = {
+		"filename" : get_filename(),
+		"id": id,
+		"level": level,
+		"position_x": position_x,
+		"position_y": position_y,
+		"cost": cost,
+		"gain": gain	
+	}
+	return save_dict
+
 func get_id() -> int :
 	return id
 

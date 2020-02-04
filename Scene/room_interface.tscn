@@ -5,7 +5,9 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 64.0393, 31.5334 )
 
-[node name="room_interface" type="Area2D"]
+[node name="room_interface" type="Area2D" groups=[
+"Persist",
+]]
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -15,4 +17,5 @@ __meta__ = {
 }
 
 [node name="Timer" type="Timer" parent="."]
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

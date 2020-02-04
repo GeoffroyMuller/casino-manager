@@ -17,6 +17,7 @@ var y : Array = [0, 64, 128, 192]
 func _ready():
 	initialize_empty_grid()
 	$allRoom/Camera2D.position = Vector2(128, 64)
+	load_game()
 	pass 
 	
 func get_object_at_coordonates(x_coord, y_coord) -> PackedScene :
@@ -38,7 +39,7 @@ func set_object_at_coordonates(x_coord, y_coord, object):
 func display_room(i, j):
 	var obj = get_object_at_coordonates(i,j)
 	if (obj != null):
-		$allRoom.add_child(obj)
+		$allRoom/Rooms.add_child(obj)
 		obj.position = Vector2(x[j], y[i])
 		
 func initialize_empty_grid():
@@ -118,3 +119,17 @@ func _input(event):
 				$allRoom/Camera2D/RoomsMenu.scale = Vector2(1, 1)
 				$allRoom/Camera2D/RoomsMenu.position = $allRoom/Camera2D/RoomsMenu.position * 2
 				
+func load_game():
+	var save_game = File.new()
+	if not save_game.file_exists("user://savegame.save"):
+		print("can't find file")
+		return 
+		
+	save_game.open("user://savegame.save", File.READ)
+	while not save_game.eof_reached():
+		var current_line = parse_json(save_game.get_line())
+		if current_line != null :
+			var new_object = load(current_line["filename"])
+			set_object_at_coordonates(current_line["position_x"], current_line["position_y"], new_object)
+		
+	save_game.close()

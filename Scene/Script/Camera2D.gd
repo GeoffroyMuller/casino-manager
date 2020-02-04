@@ -18,7 +18,7 @@ func _on_cameraUp_mouse_entered():
 
 
 func _on_TimerCameraUp_timeout():
-	self.position = self.position - Vector2(0, 10)
+	self.move_local_y(-2)
 	pass # Replace with function body.
 
 
@@ -29,7 +29,7 @@ func _on_cameraUp_mouse_exited():
 
 
 func _on_TimerCameraDown_timeout():
-	self.position = self.position + Vector2(0, 10)
+	self.move_local_y(2)
 	pass # Replace with function body.
 
 
