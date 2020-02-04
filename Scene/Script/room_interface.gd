@@ -6,6 +6,8 @@ var gain : int = 0
 var position_x : int = -1
 var position_y : int = -1
 var time : float = 0
+var level : int = 1
+var levelMax : int = 3
 export var rewardAtTime : int = 0
 
 signal clicked(room, id)
@@ -44,3 +46,8 @@ func initialize_timer():
 func initialize_gain_cost(gainR, costR):
 	gain = gainR
 	cost = costR
+
+func get_new_level():
+	if level <= levelMax :
+		level = level + 1
+	

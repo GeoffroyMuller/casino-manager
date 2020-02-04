@@ -48,7 +48,7 @@ func initialize_empty_grid():
 				set_object_at_coordonates(i, j, nul)
 			else :
 				display_room(i,j)
-				#$allRoom/Camera2D.position = get_object_at_coordonates(i,j).position
+				connect_signals(get_object_at_coordonates(i,j))
 		
 func display_all_rooms():
 	for i in range(4):
@@ -80,12 +80,6 @@ func onObjectClicked(room, id):
 	print(room.get_pos(), " ", id)
 	
 	var newPosition = get_global_mouse_position() - $".".position
-	#$allRoom/Camera2D.position = room.position
-	#$allRoom/Camera2D.zoom = Vector2(0.5, 0.5)
-	#$allRoom/RoomsMenu.scale = Vector2(0.5, 0.5)
-	
-	print($allRoom/Camera2D.position)
-	print(room.position)
 	if (id == 0 and $allRoom/RoomsMenu.visible == false):	
 		display_room_menu(room, newPosition)
 
