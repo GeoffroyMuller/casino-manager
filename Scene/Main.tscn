@@ -1,21 +1,32 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scene/Script/Grid_casino.gd" type="Script" id=1]
-[ext_resource path="res://Scene/Script/allRoom.gd" type="Script" id=2]
-[ext_resource path="res://Scene/room_menu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scene/Script/lostClick.gd" type="Script" id=2]
+[ext_resource path="res://Scene/Script/allRoom.gd" type="Script" id=3]
+[ext_resource path="res://Scene/room_menu.tscn" type="PackedScene" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1280.73, 922.542 )
 
 [node name="Grid_casino" type="Node2D"]
 position = Vector2( 64, 32 )
 script = ExtResource( 1 )
 
+[node name="lostClick" type="Area2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="lostClick"]
+position = Vector2( 98.9079, 83.4535 )
+shape = SubResource( 1 )
+
 [node name="allRoom" type="Node2D" parent="."]
 position = Vector2( -1.22775, 1.52588e-05 )
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="RoomsMenu" parent="allRoom" instance=ExtResource( 3 )]
+[node name="RoomsMenu" parent="allRoom" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( 87.4257, -7.53671 )
 z_index = 3
@@ -25,4 +36,6 @@ position = Vector2( 1.22775, -1.52588e-05 )
 current = true
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
+
+[connection signal="exit_all" from="lostClick" to="." method="_on_lostClick_exit_all"]
 [connection signal="room_selected" from="allRoom/RoomsMenu" to="." method="onObjectSelected"]

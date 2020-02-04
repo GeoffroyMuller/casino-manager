@@ -2,7 +2,7 @@ extends Node2D
 
 onready var accueil : PackedScene =  preload("res://Scene/Accueil.tscn")
 onready var machine_sous : PackedScene =  preload("res://Scene/Machine_sous.tscn")
-#onready var nul : PackedScene = preload("res://Scene/Empty.tscn")
+onready var nul : PackedScene = preload("res://Scene/Empty.tscn")
 
 signal room_selected(room, pos)
 
@@ -30,4 +30,9 @@ func _on_MASButton_pressed():
 
 func _on_exit_pressed():
 	self.visible = false
+	pass # Replace with function body.
+
+
+func _on_destroyRoom_pressed():
+	create_and_init(nul)
 	pass # Replace with function body.

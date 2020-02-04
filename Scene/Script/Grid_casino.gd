@@ -2,13 +2,13 @@ extends Node2D
 
 onready var nul : PackedScene = preload("res://Scene/Empty.tscn")
 
-signal gainChanged(gain)
+var score : int = 0
 
 onready var grid : Array = [
 	[null, null, null],
 	[null, null, null],
 	[null, null, null],
-	[preload("res://Scene/Accueil.tscn").instance(), null, null]
+	[load("res://Scene/Accueil.tscn").instance(), null, null]
 ]
 
 var x : Array = [0, 128, 256]
@@ -84,12 +84,21 @@ func onObjectClicked(room, id):
 		display_room_menu(room, newPosition)
 
 func onObjectSelected(room, pos):
-	set_object_at_coordonates(pos[0], pos[1], room)
-	$allRoom/RoomsMenu.visible = false
+	if room != null : 
+		set_object_at_coordonates(pos[0], pos[1], room)
+		$allRoom/RoomsMenu.visible = false
 
 #receive all the signals from every rooms and emit a signal who whill be handled by the main scene
 func onFactureReceived(gain, cost):
 	print("cost = ", cost, " gain = ", gain)
 	var total = gain - cost 
-	# the core scene will handled this signal and modified the gain
-	emit_signal("gainChanged", total)
+
+	score = score + total
+	if score < -10000 : 
+		pass
+
+# will close any window 
+func _on_lostClick_exit_all():
+	if $allRoom/RoomsMenu.visible : 
+		$allRoom/RoomsMenu.visible = false
+	pass # Replace with function body.

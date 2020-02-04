@@ -13,7 +13,7 @@ margin_bottom = 40.0
 
 [node name="ItemList" type="ItemList" parent="Panel"]
 margin_right = 355.0
-margin_bottom = 166.0
+margin_bottom = 201.0
 max_columns = 4
 
 [node name="AccueilButton" type="TextureButton" parent="Panel/ItemList"]
@@ -26,9 +26,9 @@ rect_scale = Vector2( 0.5, 0.5 )
 texture_normal = ExtResource( 2 )
 
 [node name="MASButton" type="TextureButton" parent="Panel/ItemList"]
-margin_left = 18.5317
+margin_left = 19.6397
 margin_top = 90.7076
-margin_right = 146.532
+margin_right = 147.64
 margin_bottom = 154.708
 rect_scale = Vector2( 0.5, 0.5 )
 texture_normal = ExtResource( 3 )
@@ -53,6 +53,16 @@ margin_top = 4.0
 margin_right = 348.0
 margin_bottom = 24.0
 text = "X"
+
+[node name="destroyRoom" type="TextureButton" parent="Panel/ItemList"]
+margin_left = 32.108
+margin_top = 153.729
+margin_right = 160.108
+margin_bottom = 217.729
+rect_scale = Vector2( 0.3, 0.3 )
+texture_normal = ExtResource( 2 )
+
 [connection signal="pressed" from="Panel/ItemList/AccueilButton" to="." method="_on_AccueilButton_pressed"]
 [connection signal="pressed" from="Panel/ItemList/MASButton" to="." method="_on_MASButton_pressed"]
 [connection signal="pressed" from="Panel/ItemList/exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Panel/ItemList/destroyRoom" to="." method="_on_destroyRoom_pressed"]
