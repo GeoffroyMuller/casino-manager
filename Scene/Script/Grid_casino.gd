@@ -8,7 +8,7 @@ onready var grid : Array = [
 	[null, null, null],
 	[null, null, null],
 	[null, null, null],
-	[null, null, null]
+	[preload("res://Scene/Accueil.tscn").instance(), null, null]
 ]
 
 var x : Array = [0, 128, 256]
@@ -16,6 +16,7 @@ var y : Array = [0, 64, 128, 192]
 
 func _ready():
 	initialize_empty_grid()
+	$allRoom/Camera2D.position = Vector2(128, 64)
 	pass 
 	
 func get_object_at_coordonates(x_coord, y_coord) -> PackedScene :
@@ -43,7 +44,11 @@ func display_room(i, j):
 func initialize_empty_grid():
 	for i in range(4):
 		for j in range(3):
-			set_object_at_coordonates(i, j, nul)
+			if get_object_at_coordonates(i, j) == null:
+				set_object_at_coordonates(i, j, nul)
+			else :
+				display_room(i,j)
+				#$allRoom/Camera2D.position = get_object_at_coordonates(i,j).position
 		
 func display_all_rooms():
 	for i in range(4):
@@ -63,16 +68,26 @@ func connect_signals(object_instance):
 	object_instance.connect("clicked", self,"onObjectClicked")
 	object_instance.connect("facture", self,"onFactureReceived")
 
-func display_room_menu(room):
+func display_room_menu(room, pos):
 	$allRoom/RoomsMenu.visible = true
-	$allRoom/RoomsMenu.position = get_global_mouse_position() - $".".position
+	$allRoom/RoomsMenu.position = pos
 	$allRoom/RoomsMenu.set_pos(room.get_pos()[0], room.get_pos()[1])
 
 # when a room is clicked screen the menu to select the room
 func onObjectClicked(room, id):
+	if $allRoom/RoomsMenu.visible :
+		$allRoom/RoomsMenu.visible = false
 	print(room.get_pos(), " ", id)
+	
+	var newPosition = get_global_mouse_position() - $".".position
+	#$allRoom/Camera2D.position = room.position
+	#$allRoom/Camera2D.zoom = Vector2(0.5, 0.5)
+	#$allRoom/RoomsMenu.scale = Vector2(0.5, 0.5)
+	
+	print($allRoom/Camera2D.position)
+	print(room.position)
 	if (id == 0 and $allRoom/RoomsMenu.visible == false):	
-		display_room_menu(room)
+		display_room_menu(room, newPosition)
 
 func onObjectSelected(room, pos):
 	set_object_at_coordonates(pos[0], pos[1], room)
