@@ -4,9 +4,13 @@
 [ext_resource path="res://Scene/Script/Empty.gd" type="Script" id=2]
 [ext_resource path="res://Sprite/New Piskel(2).png" type="Texture" id=3]
 
-[node name="Empty" instance=ExtResource( 1 )]
+[node name="Empty" groups=[
+"emptyRoom",
+] instance=ExtResource( 1 )]
+visible = false
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
 modulate = Color( 1, 1, 1, 0.278431 )
 texture = ExtResource( 3 )
+

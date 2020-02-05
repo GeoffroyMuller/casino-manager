@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scene/Script/Grid_casino.gd" type="Script" id=1]
 [ext_resource path="res://Scene/Script/allRoom.gd" type="Script" id=2]
@@ -6,10 +6,15 @@
 [ext_resource path="res://Scene/room_menu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Sprite/New Piskel(1).png" type="Texture" id=5]
 [ext_resource path="res://Scene/Script/SaveButton.gd" type="Script" id=6]
-[ext_resource path="res://Scene/Script/lostClick.gd" type="Script" id=7]
+[ext_resource path="res://Sprite/Buttons/Construire.png" type="Texture" id=7]
+[ext_resource path="res://Sprite/Buttons/ConstruireAp.png" type="Texture" id=8]
+[ext_resource path="res://Sprite/Buttons/Detruire.png" type="Texture" id=9]
+[ext_resource path="res://Sprite/Buttons/DetruireAp.png" type="Texture" id=10]
+[ext_resource path="res://Scene/Script/lostClick.gd" type="Script" id=11]
+[ext_resource path="res://Sound/Pickup_Coin.wav" type="AudioStream" id=12]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 405.248, 22 )
+extents = Vector2( 405.248, 11.9343 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1280.73, 922.542 )
@@ -70,12 +75,35 @@ margin_bottom = 264.0
 texture_normal = ExtResource( 5 )
 script = ExtResource( 6 )
 
+[node name="buildButton" type="TextureButton" parent="allRoom/Camera2D"]
+margin_left = -256.0
+margin_top = 190.0
+margin_right = -26.0
+margin_bottom = 300.0
+rect_scale = Vector2( 0.8, 0.8 )
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 8 )
+
+[node name="destroyButton" type="TextureButton" parent="allRoom/Camera2D"]
+margin_left = 64.0
+margin_top = 190.0
+margin_right = 294.0
+margin_bottom = 300.0
+rect_scale = Vector2( 0.8, 0.8 )
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 10 )
+
 [node name="lostClick" type="Area2D" parent="."]
-script = ExtResource( 7 )
+script = ExtResource( 11 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="lostClick"]
 position = Vector2( 98.9079, 83.4535 )
 shape = SubResource( 1 )
+
+[node name="SoundPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 12 )
+attenuation = 2.14354
+bus = "Sound Bus"
 
 [connection signal="mouse_entered" from="allRoom/Camera2D/cameraUp" to="allRoom/Camera2D" method="_on_cameraUp_mouse_entered"]
 [connection signal="mouse_exited" from="allRoom/Camera2D/cameraUp" to="allRoom/Camera2D" method="_on_cameraUp_mouse_exited"]
@@ -85,4 +113,5 @@ shape = SubResource( 1 )
 [connection signal="timeout" from="allRoom/Camera2D/cameraDown/TimerCameraDown" to="allRoom/Camera2D" method="_on_TimerCameraDown_timeout"]
 [connection signal="room_selected" from="allRoom/Camera2D/RoomsMenu" to="." method="onObjectSelected"]
 [connection signal="pressed" from="allRoom/Camera2D/SaveButton" to="allRoom/Camera2D/SaveButton" method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="allRoom/Camera2D/buildButton" to="." method="_on_buildButton_pressed"]
 [connection signal="exit_all" from="lostClick" to="." method="_on_lostClick_exit_all"]

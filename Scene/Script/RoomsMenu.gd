@@ -12,14 +12,14 @@ var y = -1
 func _ready():
 	pass # Replace with function body.
 
-func set_pos(x, y):
+func set_pos(y, x):
 	self.x = x
 	self.y = y 
 	
 func create_and_init(object):
 	var object_instance = object.instance()
-	object_instance.set_pos(x, y)
-	emit_signal("room_selected", object, [x, y])
+	object_instance.set_pos(y, x)
+	emit_signal("room_selected", object, [y, x])
 
 func _on_AccueilButton_pressed():
 	create_and_init(accueil)

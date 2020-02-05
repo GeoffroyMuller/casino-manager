@@ -29,9 +29,9 @@ func get_id() -> int :
 	return id
 
 func get_pos() -> Array :
-	return [position_x, position_y]
+	return [position_y, position_x]
 	
-func set_pos(x, y):
+func set_pos(y, x):
 	position_x = x
 	position_y = y
 	
