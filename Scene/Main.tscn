@@ -11,11 +11,9 @@
 [ext_resource path="res://Sprite/Buttons/ConstruireAp.png" type="Texture" id=9]
 [ext_resource path="res://Sprite/Buttons/Detruire.png" type="Texture" id=10]
 [ext_resource path="res://Sprite/Buttons/DetruireAp.png" type="Texture" id=11]
-[ext_resource path="res://Scene/Script/lostClick.gd" type="Script" id=12]
-[ext_resource path="res://Sound/Pickup_Coin.wav" type="AudioStream" id=13]
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 405.248, 11.9343 )
+[ext_resource path="res://Sprite/arrow.png" type="Texture" id=12]
+[ext_resource path="res://Scene/Script/lostClick.gd" type="Script" id=13]
+[ext_resource path="res://Sound/Pickup_Coin.wav" type="AudioStream" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1280.73, 922.542 )
@@ -40,24 +38,6 @@ drag_margin_h_enabled = false
 drag_margin_v_enabled = false
 smoothing_enabled = true
 script = ExtResource( 3 )
-
-[node name="cameraUp" type="Area2D" parent="allRoom/Camera2D"]
-position = Vector2( 0, -300 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="allRoom/Camera2D/cameraUp"]
-shape = SubResource( 2 )
-
-[node name="TimerCameraUp" type="Timer" parent="allRoom/Camera2D/cameraUp"]
-wait_time = 0.01
-
-[node name="cameraDown" type="Area2D" parent="allRoom/Camera2D"]
-position = Vector2( 0, 300 )
-
-[node name="TimerCameraDown" type="Timer" parent="allRoom/Camera2D/cameraDown"]
-wait_time = 0.01
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="allRoom/Camera2D/cameraDown"]
-shape = SubResource( 2 )
 
 [node name="RoomsMenu" parent="allRoom/Camera2D" instance=ExtResource( 4 )]
 visible = false
@@ -95,25 +75,63 @@ rect_scale = Vector2( 0.8, 0.8 )
 texture_normal = ExtResource( 10 )
 texture_pressed = ExtResource( 11 )
 
+[node name="downButton" type="TextureButton" parent="allRoom/Camera2D"]
+editor/display_folded = true
+margin_left = 460.0
+margin_top = 190.0
+margin_right = 1100.0
+margin_bottom = 830.0
+rect_rotation = 90.0
+rect_scale = Vector2( 0.1, 0.1 )
+texture_normal = ExtResource( 12 )
+
+[node name="TimerDown" type="Timer" parent="allRoom/Camera2D/downButton"]
+wait_time = 0.01
+
+[node name="upButton" type="TextureButton" parent="allRoom/Camera2D"]
+editor/display_folded = true
+margin_left = 390.0
+margin_top = -190.0
+margin_right = 1030.0
+margin_bottom = 450.0
+rect_rotation = -90.0
+rect_scale = Vector2( 0.1, 0.1 )
+texture_normal = ExtResource( 12 )
+
+[node name="TimerUp" type="Timer" parent="allRoom/Camera2D/upButton"]
+wait_time = 0.01
+
+[node name="gameSavedLabel" type="Label" parent="allRoom/Camera2D"]
+visible = false
+margin_left = -141.487
+margin_top = -67.2527
+margin_right = 141.513
+margin_bottom = 5.74731
+text = "Partie sauvegardé"
+align = 1
+valign = 1
+uppercase = true
+
 [node name="lostClick" type="Area2D" parent="."]
-script = ExtResource( 12 )
+script = ExtResource( 13 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="lostClick"]
-position = Vector2( 98.9079, 83.4535 )
+visible = false
+position = Vector2( 100.958, 83.4535 )
 shape = SubResource( 1 )
 
 [node name="SoundPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 13 )
+stream = ExtResource( 14 )
 attenuation = 2.14354
 bus = "Sound Bus"
 
-[connection signal="mouse_entered" from="allRoom/Camera2D/cameraUp" to="allRoom/Camera2D" method="_on_cameraUp_mouse_entered"]
-[connection signal="mouse_exited" from="allRoom/Camera2D/cameraUp" to="allRoom/Camera2D" method="_on_cameraUp_mouse_exited"]
-[connection signal="timeout" from="allRoom/Camera2D/cameraUp/TimerCameraUp" to="allRoom/Camera2D" method="_on_TimerCameraUp_timeout"]
-[connection signal="mouse_entered" from="allRoom/Camera2D/cameraDown" to="allRoom/Camera2D" method="_on_cameraDown_mouse_entered"]
-[connection signal="mouse_exited" from="allRoom/Camera2D/cameraDown" to="allRoom/Camera2D" method="_on_cameraDown_mouse_exited"]
-[connection signal="timeout" from="allRoom/Camera2D/cameraDown/TimerCameraDown" to="allRoom/Camera2D" method="_on_TimerCameraDown_timeout"]
 [connection signal="room_selected" from="allRoom/Camera2D/RoomsMenu" to="." method="onObjectSelected"]
 [connection signal="pressed" from="allRoom/Camera2D/SaveButton" to="allRoom/Camera2D/SaveButton" method="_on_TextureButton_pressed"]
 [connection signal="pressed" from="allRoom/Camera2D/buildButton" to="." method="_on_buildButton_pressed"]
+[connection signal="button_down" from="allRoom/Camera2D/downButton" to="allRoom/Camera2D" method="_on_downButton_button_down"]
+[connection signal="button_up" from="allRoom/Camera2D/downButton" to="allRoom/Camera2D" method="_on_downButton_button_up"]
+[connection signal="timeout" from="allRoom/Camera2D/downButton/TimerDown" to="allRoom/Camera2D" method="_on_TimerDown_timeout"]
+[connection signal="button_down" from="allRoom/Camera2D/upButton" to="allRoom/Camera2D" method="_on_upButton_button_down"]
+[connection signal="button_up" from="allRoom/Camera2D/upButton" to="allRoom/Camera2D" method="_on_upButton_button_up"]
+[connection signal="timeout" from="allRoom/Camera2D/upButton/TimerUp" to="allRoom/Camera2D" method="_on_TimerUp_timeout"]
 [connection signal="exit_all" from="lostClick" to="." method="_on_lostClick_exit_all"]

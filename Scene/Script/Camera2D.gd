@@ -11,35 +11,35 @@ var camera_down_hover : bool = false
 func _ready():
 	pass # Replace with function body.
 
-func _on_cameraUp_mouse_entered():
+func _on_downButton_button_down():
+	camera_down_hover = true
+	$downButton/TimerDown.start()
+	pass # Replace with function body.
+
+
+func _on_downButton_button_up():
+	camera_down_hover = false
+	$downButton/TimerDown.stop()
+	pass # Replace with function body.
+
+
+func _on_upButton_button_down():
 	camera_up_hover = true
-	$cameraUp/TimerCameraUp.start()
+	$upButton/TimerUp.start()
 	pass # Replace with function body.
 
 
-func _on_TimerCameraUp_timeout():
-	self.move_local_y(-2)
-	pass # Replace with function body.
-
-
-func _on_cameraUp_mouse_exited():
-	$cameraUp/TimerCameraUp.stop()
+func _on_upButton_button_up():
+	$upButton/TimerUp.stop()
 	camera_up_hover = false
 	pass # Replace with function body.
 
 
-func _on_TimerCameraDown_timeout():
+func _on_TimerUp_timeout():
+	self.move_local_y(-2)
+	pass # Replace with function body.
+
+
+func _on_TimerDown_timeout():
 	self.move_local_y(2)
-	pass # Replace with function body.
-
-
-func _on_cameraDown_mouse_entered():
-	camera_down_hover = true
-	$cameraDown/TimerCameraDown.start()
-	pass # Replace with function body.
-
-
-func _on_cameraDown_mouse_exited():
-	camera_down_hover = false
-	$cameraDown/TimerCameraDown.stop()
 	pass # Replace with function body.

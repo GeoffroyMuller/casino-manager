@@ -24,3 +24,4 @@ func save_game():
 		var node_data = i.call("save");
 		save_game.store_line(to_json(node_data))
 	save_game.close()
+
