@@ -1,17 +1,18 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scene/Script/Grid_casino.gd" type="Script" id=1]
 [ext_resource path="res://Scene/Script/allRoom.gd" type="Script" id=2]
 [ext_resource path="res://Scene/Script/Camera2D.gd" type="Script" id=3]
 [ext_resource path="res://Scene/room_menu.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Sprite/New Piskel(1).png" type="Texture" id=5]
-[ext_resource path="res://Scene/Script/SaveButton.gd" type="Script" id=6]
-[ext_resource path="res://Sprite/Buttons/Construire.png" type="Texture" id=7]
-[ext_resource path="res://Sprite/Buttons/ConstruireAp.png" type="Texture" id=8]
-[ext_resource path="res://Sprite/Buttons/Detruire.png" type="Texture" id=9]
-[ext_resource path="res://Sprite/Buttons/DetruireAp.png" type="Texture" id=10]
-[ext_resource path="res://Scene/Script/lostClick.gd" type="Script" id=11]
-[ext_resource path="res://Sound/Pickup_Coin.wav" type="AudioStream" id=12]
+[ext_resource path="res://Sprite/Buttons/Save.png" type="Texture" id=5]
+[ext_resource path="res://Sprite/Buttons/SaveAp.png" type="Texture" id=6]
+[ext_resource path="res://Scene/Script/SaveButton.gd" type="Script" id=7]
+[ext_resource path="res://Sprite/Buttons/Construire.png" type="Texture" id=8]
+[ext_resource path="res://Sprite/Buttons/ConstruireAp.png" type="Texture" id=9]
+[ext_resource path="res://Sprite/Buttons/Detruire.png" type="Texture" id=10]
+[ext_resource path="res://Sprite/Buttons/DetruireAp.png" type="Texture" id=11]
+[ext_resource path="res://Scene/Script/lostClick.gd" type="Script" id=12]
+[ext_resource path="res://Sound/Pickup_Coin.wav" type="AudioStream" id=13]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 405.248, 11.9343 )
@@ -68,12 +69,13 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -64.0
-margin_top = 200.0
-margin_right = 68.0
-margin_bottom = 264.0
+margin_left = -120.0
+margin_top = 180.0
+margin_right = 110.0
+margin_bottom = 290.0
 texture_normal = ExtResource( 5 )
-script = ExtResource( 6 )
+texture_pressed = ExtResource( 6 )
+script = ExtResource( 7 )
 
 [node name="buildButton" type="TextureButton" parent="allRoom/Camera2D"]
 margin_left = -256.0
@@ -81,8 +83,8 @@ margin_top = 190.0
 margin_right = -26.0
 margin_bottom = 300.0
 rect_scale = Vector2( 0.8, 0.8 )
-texture_normal = ExtResource( 7 )
-texture_pressed = ExtResource( 8 )
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 9 )
 
 [node name="destroyButton" type="TextureButton" parent="allRoom/Camera2D"]
 margin_left = 64.0
@@ -90,18 +92,18 @@ margin_top = 190.0
 margin_right = 294.0
 margin_bottom = 300.0
 rect_scale = Vector2( 0.8, 0.8 )
-texture_normal = ExtResource( 9 )
-texture_pressed = ExtResource( 10 )
+texture_normal = ExtResource( 10 )
+texture_pressed = ExtResource( 11 )
 
 [node name="lostClick" type="Area2D" parent="."]
-script = ExtResource( 11 )
+script = ExtResource( 12 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="lostClick"]
 position = Vector2( 98.9079, 83.4535 )
 shape = SubResource( 1 )
 
 [node name="SoundPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 12 )
+stream = ExtResource( 13 )
 attenuation = 2.14354
 bus = "Sound Bus"
 
