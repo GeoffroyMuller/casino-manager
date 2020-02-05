@@ -124,7 +124,6 @@ shape = SubResource( 1 )
 stream = ExtResource( 14 )
 attenuation = 2.14354
 bus = "Sound Bus"
-
 [connection signal="room_selected" from="allRoom/Camera2D/RoomsMenu" to="." method="onObjectSelected"]
 [connection signal="pressed" from="allRoom/Camera2D/SaveButton" to="allRoom/Camera2D/SaveButton" method="_on_TextureButton_pressed"]
 [connection signal="pressed" from="allRoom/Camera2D/buildButton" to="." method="_on_buildButton_pressed"]
